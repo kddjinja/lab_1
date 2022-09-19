@@ -8,7 +8,7 @@ data = input('Search for author: ')
 years = ['2014', '2016', '2017']
 with open('books.csv', encoding='windows-1251') as file:
     table = csv.reader(file, delimiter=';')
-    for row in list(table):
+    for row in list(table)[1:]:
         k_z += 1
         if len(row[1]) > 30:
             k_z_30 += 1
@@ -19,14 +19,14 @@ with open('books.csv', encoding='windows-1251') as file:
             flag = 1
     if flag == 0:
         print('Nothing found.')
-print(k_z - 1)
-print(k_z_30)
+print('Всего записей в файле: ', k_z)
+print('Книг с названием, содержащим более 30 символов: ', k_z_30)
 
 with open('books.csv', encoding='windows-1251') as file:
     table = csv.reader(file, delimiter=';')
     f = open('result.txt', 'w')
     count = 1  # номер книги в выводе
-    l = random.randint(1, k_z - 20)  # рандомно выбирается строка, с которой начинается запись в файл
+    l = random.randint(1, k_z - 19)  # рандомно выбирается строка, с которой начинается запись в файл
     for row in list(table)[l:]:
         f.write(str(count) + ') ' + row[3] + ' - ' + row[1] + ' - ' + row[6][:4] + '\n')
         count += 1
